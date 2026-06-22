@@ -10,7 +10,7 @@ function isTimeInRange(open, close, now) {
   const [oh, om] = open.split(':').map(Number);
   const [ch, cm] = close.split(':').map(Number);
   const nowMin = now.getHours() * 60 + now.getMinutes();
-  const openMin  = oh * 60 + om;
+  const openMin = oh * 60 + om;
   const closeMin = ch * 60 + cm;
   // Gestisce l'orario notturno (es. 23:00 → 01:00)
   if (closeMin < openMin) {
@@ -105,7 +105,7 @@ export default function LocationHours() {
   return (
     <section id="location-hours" className="location-hours" aria-labelledby="location-hours-title">
       <div className="container">
-        
+
         {/* Section Header */}
         <div className="section-header reveal">
           <span className="section-eyebrow">Dove siamo & Orari</span>
@@ -116,7 +116,7 @@ export default function LocationHours() {
         </div>
 
         <div className="location-hours__grid">
-          
+
           {/* Left Column: Map & Contact Info */}
           <div className="location-hours__col-left reveal">
             {/* Map */}
@@ -154,29 +154,7 @@ export default function LocationHours() {
               ))}
             </div>
 
-            {/* Action Buttons */}
-            <div className="location-hours__actions">
-              <a
-                id="location-hours-btn-maps"
-                href={location.mapsDirectUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="location-hours__btn-maps"
-              >
-                <span aria-hidden="true">🗺️</span>
-                Apri in Maps
-              </a>
-              <a
-                id="location-hours-btn-reserve"
-                href={location.reservations}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="location-hours__btn-reserve"
-              >
-                <span aria-hidden="true">📅</span>
-                Prenota un tavolo
-              </a>
-            </div>
+
           </div>
 
           {/* Right Column: Opening Hours & Status */}
@@ -193,33 +171,19 @@ export default function LocationHours() {
                 {isOpen ? '🟢 Siamo aperti ora' : '🔴 Al momento chiusi'}
               </div>
 
-              {/* Current Time */}
-              <div className="location-hours__current-time" aria-label={`Ora attuale: ${timeStr}`}>
-                {timeStr}
-              </div>
 
-              <p className="location-hours__description">
-                {business.description}
-              </p>
-
-              {hours.note && (
-                <div className="location-hours__note" role="note">
-                  <span>ℹ️</span> {hours.note}
-                </div>
-              )}
             </div>
 
-            {/* Schedule Table */}
+            {/* Schedule Table — solo giorni di apertura */}
             <div className="location-hours__schedule" role="table" aria-label="Orari settimanali">
-              {hours.schedule.map((row, idx) => {
-                const isToday = idx === todayConfigIndex;
-                const isClosed = !row.open;
+              {hours.schedule.filter((row) => row.open).map((row) => {
+                const isToday = hours.schedule.indexOf(row) === todayConfigIndex;
 
                 return (
                   <div
                     key={row.day}
                     role="row"
-                    className={`location-hours__row ${isToday ? 'location-hours__row--today' : ''} ${isClosed ? 'location-hours__row--closed-day' : ''}`}
+                    className={`location-hours__row ${isToday ? 'location-hours__row--today' : ''}`}
                   >
                     <div role="cell" className="location-hours__day">
                       {row.day}
@@ -231,25 +195,31 @@ export default function LocationHours() {
                     </div>
 
                     <div role="cell" className="location-hours__time-slots">
-                      {isClosed ? (
-                        <span className="location-hours__closed-label">Chiuso</span>
-                      ) : (
-                        <>
-                          <span className="location-hours__time-slot">
-                            🌞 {row.open} – {row.close}
-                          </span>
-                          {row.eveningOpen && (
-                            <span className="location-hours__time-slot">
-                              🌙 {row.eveningOpen} – {row.eveningClose}
-                            </span>
-                          )}
-                        </>
+                      <span className="location-hours__time-slot">
+                        🌞 {row.open} – {row.close}
+                      </span>
+                      {row.eveningOpen && (
+                        <span className="location-hours__time-slot">
+                          🌙 {row.eveningOpen} – {row.eveningClose}
+                        </span>
                       )}
                     </div>
                   </div>
                 );
               })}
             </div>
+
+            {/* Prenota un tavolo — sotto la tabella */}
+            <a
+              id="location-hours-btn-reserve"
+              href={location.reservations}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="location-hours__btn-reserve"
+            >
+              <span aria-hidden="true">📅</span>
+              Prenota un tavolo
+            </a>
           </div>
 
         </div>
