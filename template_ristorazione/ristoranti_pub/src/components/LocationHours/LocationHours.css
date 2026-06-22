@@ -393,3 +393,31 @@
     grid-template-columns: 85px 1fr;
   }
 }
+
+
+
+/* Stile base per tutte le future icone APNG */
+.apng-icon {
+  width: 24px;  /* Regola in base al design della tua UI */
+  height: 24px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  filter: invert(1) brightness(2);
+}
+
+/* 1. Stato di default: mostra l'immagine statica (es. il primo frame) */
+#address-icon {
+  background-image: url('/icone/iconaPinPoint.apng'); 
+}
+#car-icon {
+  background-image: url('/icone/iconaAutomobile.apng');
+}
+#letter-icon {
+  background-image: url('/icone/iconaLettera.apng');
+}
+#telephone-icon {
+  background-image: url('/icone/iconaTelefono.apng');
+}

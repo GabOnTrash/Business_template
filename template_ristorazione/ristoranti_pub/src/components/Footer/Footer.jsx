@@ -16,10 +16,10 @@ const navLinks = [
 ];
 
 const socialIcons = {
-  instagram:   { label: 'Instagram',   emoji: '📸' },
-  facebook:    { label: 'Facebook',     emoji: '👍' },
-  tripadvisor: { label: 'TripAdvisor',  emoji: '🦉' },
-  whatsapp:    { label: 'WhatsApp',     emoji: '💬' },
+  instagram:   { label: 'Instagram',   emoji: <div className="icon" id="instagram-icon" aria-hidden="true"></div> },
+  facebook:    { label: 'Facebook',     emoji: <div className="icon" id="facebook-icon" aria-hidden="true"></div> },
+  tripadvisor: { label: 'TripAdvisor',  emoji: <div className="icon" id="tripAdvisor-icon" aria-hidden="true"></div> },
+  whatsapp:    { label: 'WhatsApp',     emoji: <div className="icon" id="whatsapp-icon" aria-hidden="true"></div> },
 };
 
 export default function Footer() {
@@ -90,17 +90,17 @@ export default function Footer() {
             <ul className="footer__col-list" role="list">
               <li>
                 <a href={`tel:${location.phone.replace(/\s/g, '')}`} className="footer__col-link">
-                  📞 {location.phone}
+                  {location.phone}
                 </a>
               </li>
               <li>
                 <a href={`mailto:${location.email}`} className="footer__col-link">
-                  ✉️ {location.email}
+                  {location.email}
                 </a>
               </li>
               <li>
                 <span className="footer__col-text">
-                  📍 {location.address}<br />
+                  {location.address}<br />
                   {location.cap} {location.city}
                 </span>
               </li>

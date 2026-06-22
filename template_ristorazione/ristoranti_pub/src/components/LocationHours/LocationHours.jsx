@@ -58,14 +58,14 @@ export default function LocationHours() {
   const infoItems = [
     {
       id: 'address',
-      icon: '📍',
+      icon: <div className="apng-icon" id="address-icon" aria-hidden="true"></div>,
       label: 'Indirizzo',
       value: fullAddress,
       subvalue: location.country,
     },
     {
       id: 'phone',
-      icon: '📞',
+      icon: <div className="apng-icon" id="telephone-icon" aria-hidden="true"></div>,
       label: 'Telefono',
       value: (
         <a
@@ -80,7 +80,7 @@ export default function LocationHours() {
     },
     {
       id: 'email',
-      icon: '✉️',
+      icon: <div className="apng-icon" id="letter-icon" aria-hidden="true"></div>,
       label: 'Email',
       value: (
         <a
@@ -95,7 +95,7 @@ export default function LocationHours() {
     },
     {
       id: 'transport',
-      icon: '🚇',
+      icon: <div className="apng-icon" id="car-icon" aria-hidden="true"></div>,
       label: 'Come arrivare',
       value: location.transport,
       subvalue: location.parking,
