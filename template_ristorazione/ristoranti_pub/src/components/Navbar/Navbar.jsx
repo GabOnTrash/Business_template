@@ -2,22 +2,14 @@ import { useState, useEffect } from 'react';
 import { businessConfig } from '../../config/businessConfig';
 import './Navbar.css';
 
-/**
- * Navbar — Barra di navigazione fissa con sticky scroll e hamburger mobile.
- *
- * PERSONALIZZAZIONE: Modifica i link nav in businessConfig.js oppure
- * direttamente nell'array `navLinks` qui sotto.
- */
-
 const navLinks = [
-  { label: 'Menu',     href: '#menu' },
-  { label: 'Orari',    href: '#hours' },
-  { label: 'Il Team',  href: '#staff' },
-  { label: 'La Storia',href: '#story' },
-  { label: 'Dove siamo', href: '#location' },
+  { label: 'Menu',               type: 'page',   value: 'menu' },
+  { label: 'La Storia',          type: 'anchor', href: '#story' },
+  { label: 'Dove siamo e Orari', type: 'anchor', href: '#location-hours' },
+  { label: 'Il Team',            type: 'anchor', href: '#staff' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ view, setView }) {
   const [scrolled, setScrolled]   = useState(false);
   const [menuOpen, setMenuOpen]   = useState(false);
 
@@ -28,8 +20,34 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* Chiudi menu mobile quando si clicca un link */
-  const handleLinkClick = () => setMenuOpen(false);
+  /* Chiudi menu mobile e gestisci navigazione */
+  const handleLinkClick = (e, link) => {
+    setMenuOpen(false);
+
+    if (link.type === 'page') {
+      e.preventDefault();
+      setView(link.value);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else {
+      if (view !== 'home') {
+        e.preventDefault();
+        setView('home');
+        // Attendi che il DOM venga renderizzato per effettuare lo scroll
+        setTimeout(() => {
+          const el = document.querySelector(link.href);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 150);
+      } else {
+        e.preventDefault();
+        const el = document.querySelector(link.href);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
 
   /* Blocca scroll body quando menu mobile è aperto */
   useEffect(() => {
@@ -41,7 +59,7 @@ export default function Navbar() {
     <>
       <header
         id="navbar"
-        className={`navbar ${scrolled ? 'navbar--scrolled' : 'navbar--transparent'}`}
+        className={`navbar ${scrolled || menuOpen ? 'navbar--scrolled' : 'navbar--transparent'}`}
         role="banner"
       >
         <div className="container navbar__inner">
@@ -50,16 +68,29 @@ export default function Navbar() {
           <a
             className="navbar__logo"
             href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              setView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             aria-label={`${businessConfig.business.name} — torna all'inizio`}
           >
-            <span className="navbar__logo-name">{businessConfig.business.name}</span>
-            <span className="navbar__logo-tagline">{businessConfig.business.tagline}</span>
+            <img 
+              className="navbar__logo-img" 
+              src={businessConfig.business.image} 
+              alt={`Logo ${businessConfig.business.name}`} 
+            />
           </a>
-
+          
           {/* Desktop nav */}
           <nav className="navbar__nav" aria-label="Navigazione principale">
             {navLinks.map((link) => (
-              <a key={link.href} className="navbar__link" href={link.href}>
+              <a
+                key={link.label}
+                className={`navbar__link ${view === link.value ? 'active' : ''}`}
+                href={link.href || '#'}
+                onClick={(e) => handleLinkClick(e, link)}
+              >
                 {link.label}
               </a>
             ))}
@@ -99,10 +130,10 @@ export default function Navbar() {
       >
         {navLinks.map((link) => (
           <a
-            key={link.href}
+            key={link.label}
             className="navbar__mobile-link"
-            href={link.href}
-            onClick={handleLinkClick}
+            href={link.href || '#'}
+            onClick={(e) => handleLinkClick(e, link)}
           >
             {link.label}
           </a>
@@ -112,7 +143,7 @@ export default function Navbar() {
           href={businessConfig.location.reservations}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={handleLinkClick}
+          onClick={() => setMenuOpen(false)}
         >
           Prenota un tavolo
         </a>

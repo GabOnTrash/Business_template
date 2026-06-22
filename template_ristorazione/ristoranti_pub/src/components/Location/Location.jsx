@@ -1,13 +1,6 @@
 import { businessConfig } from '../../config/businessConfig';
 import './Location.css';
 
-/**
- * Location — Mappa Google Maps + informazioni di contatto.
- *
- * PERSONALIZZAZIONE: Modifica location in businessConfig.js
- * Sostituisci mapsEmbedUrl con l'URL del tuo iframe Google Maps.
- */
-
 export default function Location() {
   const { location, business } = businessConfig;
 
