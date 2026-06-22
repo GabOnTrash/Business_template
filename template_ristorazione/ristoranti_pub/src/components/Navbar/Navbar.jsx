@@ -2,23 +2,16 @@ import { useState, useEffect } from 'react';
 import { businessConfig } from '../../config/businessConfig';
 import './Navbar.css';
 
-/**
- * Navbar — Barra di navigazione fissa con sticky scroll e hamburger mobile.
- *
- * PERSONALIZZAZIONE: Modifica i link nav in businessConfig.js oppure
- * direttamente nell'array `navLinks` qui sotto.
- */
-
 const navLinks = [
-  { label: 'Menu',               type: 'page',   value: 'menu' },
-  { label: 'La Storia',          type: 'anchor', href: '#story' },
+  { label: 'Menu', type: 'page', value: 'menu' },
+  { label: 'La Storia', type: 'anchor', href: '#story' },
   { label: 'Dove siamo e Orari', type: 'anchor', href: '#location-hours' },
-  { label: 'Il Team',            type: 'anchor', href: '#staff' },
+  { label: 'Il Team', type: 'anchor', href: '#staff' },
 ];
 
 export default function Navbar({ view, setView }) {
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   /* Scroll listener robusto per tutti i browser e dispositivi */
   useEffect(() => {
@@ -70,7 +63,7 @@ export default function Navbar({ view, setView }) {
     <>
       <header
         id="navbar"
-        className={`navbar ${scrolled ? 'navbar--scrolled' : 'navbar--transparent'} ${menuOpen ? 'navbar--open' : ''}`}
+        className={`navbar ${scrolled || menuOpen ? 'navbar--scrolled' : 'navbar--transparent'}`}
         role="banner"
       >
         <div className="container navbar__inner">
@@ -86,8 +79,11 @@ export default function Navbar({ view, setView }) {
             }}
             aria-label={`${businessConfig.business.name} — torna all'inizio`}
           >
-            <span className="navbar__logo-name">{businessConfig.business.name}</span>
-            <span className="navbar__logo-tagline">{businessConfig.business.tagline}</span>
+            <img
+              className="navbar__logo-img"
+              src={businessConfig.business.image}
+              alt={`Logo ${businessConfig.business.name}`}
+            />
           </a>
 
           {/* Desktop nav */}

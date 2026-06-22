@@ -5,7 +5,8 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2000; /* Valore alto per rimanere sempre sopra tutte le sezioni */
+  z-index: 2000;
+  /* Valore alto per rimanere sempre sopra tutte le sezioni */
   height: var(--navbar-height);
   display: flex;
   align-items: center;
@@ -45,32 +46,22 @@
 /* ── Logo ── */
 .navbar__logo {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
   text-decoration: none;
   cursor: pointer;
 }
 
-.navbar__logo-name {
-  font-family: var(--font-heading);
-  font-size: var(--fs-xl);
-  font-weight: 700;
-  color: var(--color-accent);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  transition: color var(--transition-fast);
+.navbar__logo-img {
+  max-height: 45px;
+  /* Puoi aumentare o diminuire questo valore per scalare il logo */
+  width: auto;
+  object-fit: contain;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 
-.navbar__logo-tagline {
-  font-size: var(--fs-xs);
-  color: var(--color-text-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 400;
-}
-
-.navbar__logo:hover .navbar__logo-name {
-  color: var(--color-accent-light);
+.navbar__logo:hover .navbar__logo-img {
+  opacity: 0.8;
+  transform: scale(1.02);
 }
 
 /* ── Navigation Links ── */
@@ -179,18 +170,23 @@
   top: var(--navbar-height);
   left: 0;
   right: 0;
-  background: #0f0d0a; /* Sfondo scuro totalmente solido per evitare trasparenza visiva su mobile */
+  background: rgba(18, 15, 12, 0.98);
+  /* Sfondo scuro quasi solido per massima leggibilità su mobile */
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--color-border-solid);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  transform: translateY(-150%); /* Incrementato per nasconderlo completamente sopra la navbar */
+  transform: translateY(-150%);
+  /* Incrementato per nasconderlo completamente sopra la navbar */
   opacity: 0;
   transition: transform var(--transition-base), opacity var(--transition-base);
   pointer-events: none;
-  z-index: 1999; /* Superiore alla Hero (z-index 2), ma inferiore alla navbar (2000) */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  /* Superiore alle sezioni (incluso Hero), ma inferiore alla navbar (1000) */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .navbar__mobile-menu.open {
@@ -234,6 +230,7 @@
   .navbar__nav {
     display: none;
   }
+
   .navbar__hamburger {
     display: flex;
   }

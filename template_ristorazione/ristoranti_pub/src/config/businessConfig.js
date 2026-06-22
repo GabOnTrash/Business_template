@@ -10,8 +10,9 @@ export const businessConfig = {
 
   /* ── INFORMAZIONI GENERALI ─────────────────────────────────────── */
   business: {
-    name: "La Brace & Calice",
-    tagline: "Cucina autentica, vini selezionati",
+    /*name: "La Brace & Calice",
+    tagline: "Cucina autentica, vini selezionati",*/
+    image: "/logo_iniziale.png",
     description:
       "Un luogo dove la tradizione incontra l'innovazione. Ogni piatto racconta una storia, ogni sorso è un viaggio.",
     phone: "+39 02 1234 5678",
