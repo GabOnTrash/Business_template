@@ -21,14 +21,13 @@ export const businessConfig = {
 
   /* ── HERO SECTION ──────────────────────────────────────────────── */
   hero: {
-    // Usa un'immagine locale (es. /hero.jpg) o un URL esterno
-    backgroundImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=80",
-    headline: "Dove ogni pasto\ndiventa un ricordo",
+    backgroundImage: "/hero-chef.png",
+    headline: "AUTHENTIC ITALIAN.\nMADE FOR YOU.",
     subheadline:
-      "Ingredienti freschi, ricette di famiglia e un'atmosfera che scalda il cuore — benvenuti alla Brace & Calice.",
+      "Experience the true taste of Italy with fresh ingredients, time-honored recipes, and a passion for great food.",
     cta: {
-      primary:   { label: "Sfoglia il Menù", href: "#menu" },
-      secondary: { label: "Trovaci su mappa", href: "#location" },
+      primary:   { label: "EXPLORE OUR MENU", href: "#menu" },
+      secondary: { label: "Trovaci su mappa", href: "#location-hours" },
     },
   },
 

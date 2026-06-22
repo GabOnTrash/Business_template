@@ -3,11 +3,11 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
+  background-color: #0c0a08;
 }
 
 /* ── Background Image ── */
@@ -21,25 +21,27 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  /* Leggero zoom-in all'avvio */
-  animation: hero-zoom 12s ease-out forwards;
+  object-position: center 65%; /* Focus sul tagliere con la carne (parte inferiore dell'immagine) */
+  animation: hero-zoom 20s ease-out forwards;
 }
 
 @keyframes hero-zoom {
-  from { transform: scale(1.08); }
+  from { transform: scale(1.05); }
   to   { transform: scale(1); }
 }
 
-/* ── Overlay ── */
+/* ── Sfumatura / Overlay ── */
+/* Un gradiente che scurisce molto la sinistra dello schermo per far risaltare il testo, 
+   mentre sfuma quasi a trasparente sulla destra lasciando visibile l'immagine del piatto */
 .hero__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    160deg,
-    rgba(10, 8, 4, 0.75) 0%,
-    rgba(10, 8, 4, 0.55) 50%,
-    rgba(15, 10, 2, 0.80) 100%
+    90deg,
+    rgba(10, 8, 6, 0.95) 0%,
+    rgba(10, 8, 6, 0.85) 30%,
+    rgba(10, 8, 6, 0.60) 60%,
+    rgba(10, 8, 6, 0.20) 100%
   );
   z-index: 1;
 }
@@ -48,156 +50,153 @@
 .hero__content {
   position: relative;
   z-index: 2;
-  text-align: center;
-  max-width: 800px;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
   padding: 0 var(--space-6);
-  padding-top: var(--navbar-height);
+  padding-top: 0; /* Rimossa per un perfetto allineamento al centro verticale dello schermo */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Allineamento a sinistra */
 }
 
-/* ── Eyebrow ── */
+/* ── Eyebrow Calligrafico ── */
 .hero__eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  gap: var(--space-4);
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2.2rem; /* Script font grandi e leggibili */
   color: var(--color-accent);
-  background: var(--color-accent-muted);
-  border: 1px solid var(--color-border-solid);
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-full);
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-2);
+  line-height: 1;
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: 0.02em;
   opacity: 0;
-  animation: fade-up 0.7s ease 0.3s forwards;
+  animation: fade-up 0.8s ease 0.3s forwards;
+}
+
+.hero__eyebrow-line {
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-accent);
+  vertical-align: middle;
 }
 
 /* ── Headline ── */
 .hero__headline {
-  font-size: clamp(var(--fs-4xl), 7vw, var(--fs-6xl));
-  font-weight: 700;
-  line-height: 1.1;
-  white-space: pre-line;
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem); /* Dimensioni adeguate, non eccessive per evitare wrap brutti */
+  font-weight: 400; /* Stile pulito, elegante e leggero come in foto */
+  line-height: 1.15;
   color: var(--color-text);
-  margin-bottom: var(--space-6);
+  text-transform: uppercase;
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+  text-align: left;
+  letter-spacing: 0.03em;
+  white-space: pre-line;
   opacity: 0;
-  animation: fade-up 0.7s ease 0.5s forwards;
+  animation: fade-up 0.8s ease 0.5s forwards;
 }
 
-.hero__headline em {
-  font-style: italic;
-  color: var(--color-accent);
+/* ── Divisore Sottile Dorato ── */
+.hero__divider {
+  width: 50px;
+  height: 1px;
+  background-color: var(--color-accent);
+  margin: var(--space-6) 0;
+  opacity: 0;
+  animation: fade-up 0.8s ease 0.6s forwards;
 }
 
 /* ── Subheadline ── */
 .hero__subheadline {
-  font-size: var(--fs-lg);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
   color: rgba(245, 240, 232, 0.8);
   line-height: 1.7;
-  max-width: 580px;
-  margin: 0 auto var(--space-10);
+  max-width: 450px;
+  margin: 0 0 var(--space-8) 0;
+  text-align: left;
+  font-weight: 300;
   opacity: 0;
-  animation: fade-up 0.7s ease 0.7s forwards;
+  animation: fade-up 0.8s ease 0.7s forwards;
 }
 
-/* ── CTA Buttons ── */
+/* ── CTA Button (Outlined Rettangolare con angoli vivi) ── */
 .hero__actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-4);
-  flex-wrap: wrap;
   opacity: 0;
-  animation: fade-up 0.7s ease 0.9s forwards;
+  animation: fade-up 0.8s ease 0.9s forwards;
+  margin-bottom: var(--space-12);
 }
 
 .hero__btn-primary {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-8);
-  background: var(--color-accent);
-  color: var(--color-bg);
-  border-radius: var(--radius-full);
-  font-size: var(--fs-base);
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-10);
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 0; /* Angoli vivi, come da reference */
+  font-family: var(--font-body);
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: all var(--transition-base);
 }
 
 .hero__btn-primary:hover {
-  background: var(--color-accent-light);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
+  background: var(--color-text);
+  color: #0c0a08;
+  border-color: var(--color-text);
 }
 
-.hero__btn-secondary {
-  display: inline-flex;
+.hero__btn-arrow {
+  font-size: 1.1rem;
+  transition: transform var(--transition-fast);
+}
+
+.hero__btn-primary:hover .hero__btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Indicatori di Slide ── */
+.hero__indicators {
+  margin-top: auto; /* Spinge gli indicatori in fondo alla sezione content */
+  padding-bottom: var(--space-8);
+  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-8);
-  background: transparent;
-  color: var(--color-text);
-  border: 1px solid var(--color-border-solid);
-  border-radius: var(--radius-full);
-  font-size: var(--fs-base);
+  gap: var(--space-4);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
   font-weight: 500;
-  text-decoration: none;
-  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.hero__btn-secondary:hover {
-  background: rgba(245, 240, 232, 0.1);
-  border-color: var(--color-text-muted);
-  transform: translateY(-2px);
-}
-
-/* ── Scroll Indicator ── */
-.hero__scroll-indicator {
-  position: absolute;
-  bottom: var(--space-8);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
+  letter-spacing: 0.05em;
+  color: rgba(245, 240, 232, 0.4);
   opacity: 0;
-  animation: fade-in 1s ease 1.5s forwards;
+  animation: fade-in 1s ease 1.2s forwards;
 }
 
-.hero__scroll-mouse {
-  width: 24px;
-  height: 38px;
-  border: 2px solid rgba(212, 160, 23, 0.5);
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  padding-top: 6px;
+.hero__indicator {
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  padding-bottom: 2px;
 }
 
-.hero__scroll-dot {
-  width: 4px;
-  height: 8px;
-  background: var(--color-accent);
-  border-radius: var(--radius-full);
-  animation: scroll-dot 2s ease infinite;
-}
-
-@keyframes scroll-dot {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  60%       { transform: translateY(10px); opacity: 0; }
-}
-
-.hero__scroll-label {
-  font-size: var(--fs-xs);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.hero__indicator--active {
   color: var(--color-accent);
-  font-weight: 600;
+  border-bottom: 1px solid var(--color-accent);
+}
+
+.hero__indicator-sep {
+  color: rgba(245, 240, 232, 0.15);
 }
 
 /* ── Keyframes ── */
@@ -208,20 +207,44 @@
 
 @keyframes fade-in {
   from { opacity: 0; }
-  to   { opacity: 0.8; }
+  to   { opacity: 1; }
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
+  .hero__overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 8, 6, 0.90) 0%,
+      rgba(10, 8, 6, 0.80) 50%,
+      rgba(10, 8, 6, 0.95) 100%
+    );
+  }
+
+  .hero__content {
+    padding-top: calc(var(--navbar-height) + var(--space-12));
+    justify-content: center;
+  }
+
+  .hero__eyebrow {
+    font-size: 1.8rem;
+  }
+
   .hero__headline {
-    font-size: var(--fs-4xl);
+    font-size: 2rem;
   }
+
   .hero__subheadline {
-    font-size: var(--fs-base);
-  }
-  .hero__btn-primary,
-  .hero__btn-secondary {
-    padding: var(--space-3) var(--space-6);
     font-size: var(--fs-sm);
+    max-width: 100%;
+  }
+
+  .hero__btn-primary {
+    padding: var(--space-4) var(--space-8);
+    font-size: 0.75rem;
+  }
+
+  .hero__indicators {
+    padding-bottom: var(--space-4);
   }
 }

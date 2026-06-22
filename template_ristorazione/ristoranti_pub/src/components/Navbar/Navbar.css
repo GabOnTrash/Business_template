@@ -5,11 +5,12 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 2000; /* Valore alto per rimanere sempre sopra tutte le sezioni */
   height: var(--navbar-height);
   display: flex;
   align-items: center;
-  transition: background var(--transition-slow), box-shadow var(--transition-slow);
+  transition: background var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  border-bottom: 1px solid transparent;
 }
 
 /* Stato trasparente (top della pagina) */
@@ -17,13 +18,21 @@
   background: transparent;
 }
 
-/* Stato scrollato */
+/* Stato scrollato — semi-solido per leggibilità eccellente su ogni sezione */
 .navbar--scrolled {
-  background: var(--color-bg-glass);
+  background: rgba(15, 13, 10, 0.96);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: var(--glass-border);
+  border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
+}
+
+/* Stato quando il menu mobile è aperto — completamente solido per evitare sovrapposizioni visive con la Hero */
+.navbar.navbar--open {
+  background: #0f0d0a !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid var(--color-border-solid) !important;
 }
 
 .navbar__inner {
@@ -170,18 +179,18 @@
   top: var(--navbar-height);
   left: 0;
   right: 0;
-  background: var(--color-bg-glass);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-bottom: var(--glass-border);
+  background: #0f0d0a; /* Sfondo scuro totalmente solido per evitare trasparenza visiva su mobile */
+  border-bottom: 1px solid var(--color-border-solid);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  transform: translateY(-120%);
+  transform: translateY(-150%); /* Incrementato per nasconderlo completamente sopra la navbar */
   opacity: 0;
-  transition: transform var(--transition-slow), opacity var(--transition-slow);
+  transition: transform var(--transition-base), opacity var(--transition-base);
   pointer-events: none;
+  z-index: 1999; /* Superiore alla Hero (z-index 2), ma inferiore alla navbar (2000) */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .navbar__mobile-menu.open {

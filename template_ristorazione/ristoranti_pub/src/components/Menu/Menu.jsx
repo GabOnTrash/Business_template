@@ -9,20 +9,33 @@ import './Menu.css';
  * businessConfig.js → menu.categories
  */
 
-export default function Menu() {
+export default function Menu({ onBackToHome }) {
   const { menu, tags } = businessConfig;
   const [activeTab, setActiveTab] = useState(menu.categories[0]?.id ?? '');
 
   const activeCategory = menu.categories.find((c) => c.id === activeTab);
 
   return (
-    <section id="menu" className="menu" aria-labelledby="menu-title">
+    <section id="menu" className="menu menu--page" aria-labelledby="menu-title">
       <div className="container">
+
+        {/* Back Button */}
+        {onBackToHome && (
+          <div className="menu__back-wrapper reveal">
+            <button
+              onClick={onBackToHome}
+              className="menu__back-btn"
+              aria-label="Torna alla home page"
+            >
+              <span>←</span> Torna alla Home
+            </button>
+          </div>
+        )}
 
         {/* Section Header */}
         <div className="section-header reveal">
           <span className="section-eyebrow">Il Nostro</span>
-          <h2 className="section-title" id="menu-title">Menu</h2>
+          <h1 className="section-title" id="menu-title">Menu</h1>
           <p className="section-subtitle">
             Ingredienti selezionati, ricette di stagione — ogni piatto racconta la nostra filosofia.
           </p>

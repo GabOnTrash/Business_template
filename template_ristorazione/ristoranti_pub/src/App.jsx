@@ -1,27 +1,22 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 /* ── Components ── */
-import Navbar   from './components/Navbar/Navbar';
-import Hero     from './components/Hero/Hero';
-import Menu     from './components/Menu/Menu';
-import Hours    from './components/Hours/Hours';
-import Staff    from './components/Staff/Staff';
-import Story    from './components/Story/Story';
-import Location from './components/Location/Location';
-import Footer   from './components/Footer/Footer';
+import Navbar        from './components/Navbar/Navbar';
+import Hero          from './components/Hero/Hero';
+import Menu          from './components/Menu/Menu';
+import Staff         from './components/Staff/Staff';
+import Story         from './components/Story/Story';
+import LocationHours from './components/LocationHours/LocationHours';
+import Footer        from './components/Footer/Footer';
 
 /**
  * App — Assembla tutte le sezioni del sito.
  *
- * Per aggiungere/rimuovere sezioni:
- * 1. Importa il componente
- * 2. Aggiungilo/rimuovilo dal JSX qui sotto
- * 3. Aggiungi il link corrispondente in Navbar.jsx → navLinks
- *
  * Per personalizzare i contenuti → src/config/businessConfig.js
  */
 function App() {
+  const [view, setView] = useState('home'); // 'home' | 'menu'
 
   /* ── Scroll Reveal Observer ── */
   useEffect(() => {
@@ -45,35 +40,35 @@ function App() {
     revealElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [view]);
 
   return (
     <div className="app">
       {/* ── Navigazione ── */}
-      <Navbar />
+      <Navbar view={view} setView={setView} />
 
       {/* ── Contenuto Principale ── */}
-      <main id="main-content">
+      {view === 'menu' ? (
+        <main id="main-content">
+          <Menu onBackToHome={() => setView('home')} />
+        </main>
+      ) : (
+        <main id="main-content">
 
-        {/* 1. Hero / Banner principale */}
-        <Hero />
+          {/* 1. Hero / Banner principale */}
+          <Hero setView={setView} />
 
-        {/* 2. Menu */}
-        <Menu />
+          {/* 2. La nostra storia (About) */}
+          <Story />
 
-        {/* 3. Orari di apertura */}
-        <Hours />
+          {/* 3. Dove siamo e Orari */}
+          <LocationHours />
 
-        {/* 4. Staff / Il Team */}
-        <Staff />
+          {/* 4. Staff / Il Team */}
+          <Staff />
 
-        {/* 5. La nostra storia */}
-        <Story />
-
-        {/* 6. Dove siamo / Mappa */}
-        <Location />
-
-      </main>
+        </main>
+      )}
 
       {/* ── Footer ── */}
       <Footer />

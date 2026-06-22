@@ -1,0 +1,395 @@
+/* LocationHours.css */
+
+.location-hours {
+  padding: var(--space-24) 0;
+  background: var(--color-bg-card);
+}
+
+.location-hours__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+/* ── Left Column (Map & Info) ── */
+.location-hours__col-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ── Map ── */
+.location-hours__map-wrapper {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  min-height: 350px;
+  box-shadow: var(--shadow-md);
+}
+
+.location-hours__map {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  border: none;
+  display: block;
+  filter: grayscale(40%) contrast(1.1);
+  transition: filter var(--transition-slow);
+}
+
+.location-hours__map-wrapper:hover .location-hours__map {
+  filter: grayscale(0%) contrast(1);
+}
+
+.location-hours__map-label {
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  background: var(--color-bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  pointer-events: none;
+}
+
+.location-hours__map-label-name {
+  font-family: var(--font-heading);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.location-hours__map-label-addr {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* ── Contact Info Cards ── */
+.location-hours__info-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.location-hours__info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.location-hours__info-item:hover {
+  border-color: var(--color-border-solid);
+  background: var(--color-bg);
+}
+
+.location-hours__info-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--color-accent-muted);
+  border: 1px solid var(--color-border-solid);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-lg);
+  flex-shrink: 0;
+}
+
+.location-hours__info-body {
+  flex: 1;
+  min-width: 0; /* Prevent flex blowout */
+}
+
+.location-hours__info-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-1);
+  display: block;
+}
+
+.location-hours__info-value {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.location-hours__info-subvalue {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+  display: block;
+}
+
+.location-hours__info-link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.location-hours__info-link:hover {
+  color: var(--color-accent-light);
+  text-decoration: underline;
+}
+
+/* ── CTA Buttons ── */
+.location-hours__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.location-hours__btn-maps {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.location-hours__btn-maps:hover {
+  background: var(--color-accent-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow);
+}
+
+.location-hours__btn-reserve {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border-solid);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.location-hours__btn-reserve:hover {
+  background: rgba(245, 240, 232, 0.08);
+  border-color: var(--color-text-muted);
+  transform: translateY(-1px);
+}
+
+/* ── Right Column (Status & Schedule) ── */
+.location-hours__col-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+}
+
+.location-hours__status-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-6);
+}
+
+/* Status Badge */
+.location-hours__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+.location-hours__status--open {
+  background: rgba(76, 175, 80, 0.12);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.25);
+}
+
+.location-hours__status--closed {
+  background: rgba(244, 67, 54, 0.12);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.25);
+}
+
+.location-hours__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.location-hours__status--open .location-hours__status-dot {
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.5); }
+  50%       { box-shadow: 0 0 0 6px rgba(76, 175, 80, 0); }
+}
+
+.location-hours__current-time {
+  font-family: var(--font-heading);
+  font-size: var(--fs-4xl);
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: -0.02em;
+}
+
+.location-hours__description {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.location-hours__note {
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+  line-height: 1.5;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-accent-muted);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+/* Schedule Table */
+.location-hours__schedule {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-hours__row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-fast);
+}
+
+.location-hours__row:last-child {
+  border-bottom: none;
+}
+
+.location-hours__row--today {
+  background: var(--color-accent-muted);
+  border-left: 3px solid var(--color-accent);
+  padding-left: calc(var(--space-2) - 3px);
+}
+
+.location-hours__row--closed-day {
+  opacity: 0.5;
+}
+
+.location-hours__day {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.location-hours__row--today .location-hours__day {
+  color: var(--color-accent);
+}
+
+.location-hours__time-slots {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.location-hours__time-slot {
+  font-size: var(--fs-xs);
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+.location-hours__closed-label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.location-hours__today-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  margin-left: var(--space-2);
+  vertical-align: middle;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .location-hours__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 640px) {
+  .location-hours {
+    padding: var(--space-16) 0;
+  }
+
+  .location-hours__info-list {
+    grid-template-columns: 1fr;
+  }
+
+  .location-hours__map-wrapper {
+    min-height: 280px;
+  }
+  
+  .location-hours__map {
+    min-height: 280px;
+  }
+
+  .location-hours__col-right {
+    padding: var(--space-4);
+  }
+
+  .location-hours__row {
+    grid-template-columns: 85px 1fr;
+  }
+}
