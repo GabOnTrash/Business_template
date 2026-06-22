@@ -304,7 +304,7 @@
 
 .location-hours__row {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 100px 1fr minmax(88px, auto);
   gap: var(--space-4);
   align-items: center;
   padding: var(--space-3) var(--space-2);
@@ -314,6 +314,10 @@
 
 .location-hours__row:last-child {
   border-bottom: none;
+}
+
+.location-hours__day-status {
+  justify-self: end;
 }
 
 .location-hours__row--today {

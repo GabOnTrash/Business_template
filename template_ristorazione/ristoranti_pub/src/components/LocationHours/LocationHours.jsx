@@ -27,11 +27,21 @@ function checkIsOpen(schedule, now) {
   const configIndex = dayIndex === 0 ? 6 : dayIndex - 1; // 0 = lunedì ... 6 = domenica
   const today = schedule[configIndex];
   if (!today || !today.open) return false;
-
   const lunchOpen = isTimeInRange(today.open, today.close, now);
   const dinnerOpen = today.eveningOpen
     ? isTimeInRange(today.eveningOpen, today.eveningClose, now)
     : false;
+  return lunchOpen || dinnerOpen;
+}
+
+function isRowOpenNow(row, now) {
+  if (!row || !row.open) return false;
+
+  const lunchOpen = isTimeInRange(row.open, row.close, now);
+  const dinnerOpen = row.eveningOpen
+    ? isTimeInRange(row.eveningOpen, row.eveningClose, now)
+    : false;
+
   return lunchOpen || dinnerOpen;
 }
 
@@ -159,23 +169,11 @@ export default function LocationHours() {
 
           {/* Right Column: Opening Hours & Status */}
           <div className="location-hours__col-right reveal">
-            <div className="location-hours__status-card">
-              {/* Open/Closed Badge */}
-              <div
-                className={`location-hours__status ${isOpen ? 'location-hours__status--open' : 'location-hours__status--closed'}`}
-                role="status"
-                aria-live="polite"
-                aria-label={isOpen ? 'Attualmente aperto' : 'Attualmente chiuso'}
-              >
-                <span className="location-hours__status-dot" aria-hidden="true" />
-                {isOpen ? 'Aperti ora' : 'Al momento chiusi'}
-              </div>
-            </div>
-
             {/* Schedule Table — solo giorni di apertura */}
             <div className="location-hours__schedule" role="table" aria-label="Orari settimanali">
-              {hours.schedule.filter((row) => row.open).map((row) => {
-                const isToday = hours.schedule.indexOf(row) === todayConfigIndex;
+              {hours.schedule.map((row, index) => {
+                const isToday = index === todayConfigIndex;
+                const todayStatus = isToday ? isRowOpenNow(row, now) : false;
 
                 return (
                   <div
@@ -193,14 +191,31 @@ export default function LocationHours() {
                     </div>
 
                     <div role="cell" className="location-hours__time-slots">
-                      <span className="location-hours__time-slot">
-                        {row.open} – {row.close}
-                      </span>
-                      {row.eveningOpen && (
-                        <span className="location-hours__time-slot">
-                          {row.eveningOpen} – {row.eveningClose}
-                        </span>
+                      {row.open ? (
+                        <>
+                          <span className="location-hours__time-slot">
+                            {row.open} – {row.close}
+                          </span>
+                          {row.eveningOpen && (
+                            <span className="location-hours__time-slot">
+                              {row.eveningOpen} – {row.eveningClose}
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        <span className="location-hours__closed-label">Chiuso</span>
                       )}
+                    </div>
+
+                    <div role="cell" className="location-hours__day-status">
+                      {isToday ? (
+                        <span
+                          className={`location-hours__status ${todayStatus ? 'location-hours__status--open' : 'location-hours__status--closed'}`}
+                          aria-label={todayStatus ? 'Aperto ora' : 'Chiuso ora'}
+                        >
+                          {todayStatus ? 'Aperto' : 'Chiuso'}
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                 );
