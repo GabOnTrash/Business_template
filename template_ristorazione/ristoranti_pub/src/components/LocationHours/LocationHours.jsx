@@ -168,10 +168,8 @@ export default function LocationHours() {
                 aria-label={isOpen ? 'Attualmente aperto' : 'Attualmente chiuso'}
               >
                 <span className="location-hours__status-dot" aria-hidden="true" />
-                {isOpen ? '🟢 Siamo aperti ora' : '🔴 Al momento chiusi'}
+                {isOpen ? 'Aperti ora' : 'Al momento chiusi'}
               </div>
-
-
             </div>
 
             {/* Schedule Table — solo giorni di apertura */}
@@ -196,11 +194,11 @@ export default function LocationHours() {
 
                     <div role="cell" className="location-hours__time-slots">
                       <span className="location-hours__time-slot">
-                        🌞 {row.open} – {row.close}
+                        {row.open} – {row.close}
                       </span>
                       {row.eveningOpen && (
                         <span className="location-hours__time-slot">
-                          🌙 {row.eveningOpen} – {row.eveningClose}
+                          {row.eveningOpen} – {row.eveningClose}
                         </span>
                       )}
                     </div>
@@ -217,7 +215,9 @@ export default function LocationHours() {
               rel="noopener noreferrer"
               className="location-hours__btn-reserve"
             >
-              <span aria-hidden="true">📅</span>
+              <span aria-hidden="true">
+                <div className="apng-icon" id="fork-knife-icon" aria-hidden="true"></div>
+              </span>
               Prenota un tavolo
             </a>
           </div>

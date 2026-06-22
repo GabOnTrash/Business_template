@@ -184,7 +184,7 @@
   padding: 1rem var(--space-6);
   background: var(--color-accent);
   color: var(--color-bg);
-  margin-top: 2rem;
+  margin-top: 3rem;
   border: none;
   border-radius: var(--radius-md);
   font-size: var(--fs-base);
@@ -370,6 +370,39 @@
   vertical-align: middle;
 }
 
+/* Stile base per tutte le future icone APNG */
+.apng-icon {
+  width: 24px;  /* Regola in base al design della tua UI */
+  height: 24px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  filter: invert(1) brightness(2);
+}
+
+/* 1. Stato di default: mostra l'immagine statica (es. il primo frame) */
+#address-icon {
+  background-image: url('/icone/iconaPinPoint.apng'); 
+}
+#car-icon {
+  background-image: url('/icone/iconaAutomobile.apng');
+}
+#letter-icon {
+  background-image: url('/icone/iconaLettera.apng');
+}
+#telephone-icon {
+  background-image: url('/icone/iconaTelefono.apng');
+}
+#fork-knife-icon {
+  background-image: url('/icone/iconaPosate.png');
+  filter: invert(0);
+  width: 28px;
+  height: 28px;
+  translate: 0 3px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .location-hours__grid {
@@ -402,32 +435,4 @@
   .location-hours__row {
     grid-template-columns: 85px 1fr;
   }
-}
-
-
-
-/* Stile base per tutte le future icone APNG */
-.apng-icon {
-  width: 24px;  /* Regola in base al design della tua UI */
-  height: 24px;
-  display: inline-block;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  filter: invert(1) brightness(2);
-}
-
-/* 1. Stato di default: mostra l'immagine statica (es. il primo frame) */
-#address-icon {
-  background-image: url('/icone/iconaPinPoint.apng'); 
-}
-#car-icon {
-  background-image: url('/icone/iconaAutomobile.apng');
-}
-#letter-icon {
-  background-image: url('/icone/iconaLettera.apng');
-}
-#telephone-icon {
-  background-image: url('/icone/iconaTelefono.apng');
 }

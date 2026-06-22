@@ -229,7 +229,7 @@ export const businessConfig = {
   hours: {
     // Usa null per i giorni di chiusura
     schedule: [
-      { day: "Lunedì",    open: null,    close: null },      // Chiuso
+      { day: "Lunedì",   open: "12:00", close: "0:00", eveningOpen: "18:30", eveningClose: "23:00" },      // Chiuso
       { day: "Martedì",  open: "12:00", close: "15:00", eveningOpen: "18:30", eveningClose: "23:00" },
       { day: "Mercoledì",open: "12:00", close: "15:00", eveningOpen: "18:30", eveningClose: "23:00" },
       { day: "Giovedì",  open: "12:00", close: "15:00", eveningOpen: "18:30", eveningClose: "23:00" },
