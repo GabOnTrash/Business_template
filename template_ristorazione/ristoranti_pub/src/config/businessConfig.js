@@ -235,7 +235,7 @@ export const businessConfig = {
       { day: "Giovedì",  open: "12:00", close: "15:00", eveningOpen: "18:30", eveningClose: "23:00" },
       { day: "Venerdì",  open: "12:00", close: "15:30", eveningOpen: "18:30", eveningClose: "23:30" },
       { day: "Sabato",   open: "12:00", close: "16:00", eveningOpen: "18:00", eveningClose: "24:00" },
-      { day: "Domenica", open: "12:00", close: "16:00", eveningOpen: null,    eveningClose: null },
+      { day: "Domenica", open: "12:00", close: "16:00", eveningOpen: "18:00", eveningClose: "24:00" },
     ],
     note: "La cucina è aperta fino a 30 minuti prima della chiusura. Consigliamo la prenotazione.",
   },
