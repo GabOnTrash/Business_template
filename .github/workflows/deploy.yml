@@ -16,6 +16,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    
+    # INDICA A GITHUB DI ENTRARE NELLA SOTTOCARTELLA PER TUTTI I COMANDI
+    defaults:
+      run:
+        working-directory: ./template_ristorazione/ristoranti_pub
+
     steps:
       - name: Checkout del codice
         uses: actions/checkout@v4
@@ -25,6 +31,8 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+          # INDICA IL PERCORSO CORRETTO DEL FILE LOCK PER LA CACHE
+          cache-dependency-path: ./template_ristorazione/ristoranti_pub/package-lock.json
 
       - name: Installa dipendenze
         run: npm ci
@@ -32,7 +40,6 @@ jobs:
       - name: Build del progetto con variabili d'ambiente
         run: npm run build
         env:
-          # Qui GitHub inietta i segreti che hai impostato prima trasformandoli in variabili per la build
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
@@ -42,7 +49,8 @@ jobs:
       - name: Carica l'artefatto della build
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Se usi Vite la cartella è 'dist', per altri framework potrebbe essere 'build' o '.'
+          # INDICA IL PERCORSO DELLA CARTELLA DIST DENTRO LA SOTTOCARTELLA
+          path: './template_ristorazione/ristoranti_pub/dist'
 
       - name: Deploy su GitHub Pages
         id: deployment
