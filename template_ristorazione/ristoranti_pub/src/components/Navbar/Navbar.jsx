@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react';
 import { businessConfig } from '../../config/businessConfig';
 import './Navbar.css';
 
-const navLinks = [
-  { label: 'Menu', type: 'page', value: 'menu' },
-  { label: 'La Storia', type: 'anchor', href: '#story' },
-  { label: 'Dove siamo e Orari', type: 'anchor', href: '#location-hours' },
-  { label: 'Il Team', type: 'anchor', href: '#staff' },
-];
-
 export default function Navbar({ view, setView }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navLinks = [
+    view === 'menu'
+      ? { label: 'Home', type: 'page', value: 'home' }
+      : { label: 'Menu', type: 'page', value: 'menu' },
+    { label: 'La Storia', type: 'anchor', href: '#story' },
+    { label: 'Dove siamo e Orari', type: 'anchor', href: '#location-hours' },
+    { label: 'Il Team', type: 'anchor', href: '#staff' },
+  ];
 
   /* Scroll listener robusto per tutti i browser e dispositivi */
   useEffect(() => {
