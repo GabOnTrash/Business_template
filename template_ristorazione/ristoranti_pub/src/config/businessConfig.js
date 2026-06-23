@@ -6,13 +6,19 @@
  * ═══════════════════════════════════════════════════════════════════
  */
 
+// Helper per risolvere i percorsi degli asset pubblici con il BASE_URL corretto
+const resolvePublicPath = (path) => {
+  if (!path.startsWith('/')) return path; // Se non inizia con /, potrebbe essere un URL esterno
+  return import.meta.env.BASE_URL + path.slice(1);
+};
+
 export const businessConfig = {
 
   /* ── INFORMAZIONI GENERALI ─────────────────────────────────────── */
   business: {
     /*name: "La Brace & Calice",
     tagline: "Cucina autentica, vini selezionati",*/
-    image: "/logo_iniziale.png",
+    image: resolvePublicPath("/logo_iniziale.png"),
     description:
       "Un luogo dove la tradizione incontra l'innovazione. Ogni piatto racconta una storia, ogni sorso è un viaggio.",
     phone: "+39 02 1234 5678",
@@ -22,7 +28,7 @@ export const businessConfig = {
 
   /* ── HERO SECTION ──────────────────────────────────────────────── */
   hero: {
-    backgroundImage: "/hero-chef.png",
+    backgroundImage: resolvePublicPath("/hero-chef.png"),
     headline: "AUTHENTIC ITALIAN.\nMADE FOR YOU.",
     subheadline:
       "Experience the true taste of Italy with fresh ingredients, time-honored recipes, and a passion for great food.",
