@@ -184,8 +184,8 @@
   padding: 1rem var(--space-6);
   background: var(--color-accent);
   color: var(--color-bg);
-  margin-top: 3rem;
   border: none;
+  margin-top: 1rem;
   border-radius: var(--radius-md);
   font-size: var(--fs-base);
   font-weight: 700;
@@ -203,6 +203,7 @@
 /* ── Right Column (Status & Schedule) ── */
 .location-hours__col-right {
   display: flex;
+  height: 100%;
   flex-direction: column;
   gap: var(--space-6);
   background: var(--color-bg);

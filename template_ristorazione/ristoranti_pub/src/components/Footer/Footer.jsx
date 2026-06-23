@@ -71,6 +71,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation Column */}
+          <div></div>
           <div>
             <span className="footer__col-title">Navigazione</span>
             <ul className="footer__col-list" role="list">
@@ -103,33 +104,6 @@ export default function Footer() {
                   {location.address}<br />
                   {location.cap} {location.city}
                 </span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Info Column */}
-          <div>
-            <span className="footer__col-title">Info</span>
-            <ul className="footer__col-list" role="list">
-              <li>
-                <a
-                  href={location.reservations}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer__col-link"
-                >
-                  📅 Prenota un tavolo
-                </a>
-              </li>
-              <li>
-                <a href="#menu" className="footer__col-link">
-                  🍽️ Consulta il menu
-                </a>
-              </li>
-              <li>
-                <a href="#hours" className="footer__col-link">
-                  🕐 Orari di apertura
-                </a>
               </li>
             </ul>
           </div>
