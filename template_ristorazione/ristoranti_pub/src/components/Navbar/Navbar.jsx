@@ -55,12 +55,6 @@ export default function Navbar({ view, setView }) {
     }
   };
 
-  /* Blocca scroll body quando menu mobile è aperto */
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [menuOpen]);
-
   return (
     <>
       <header
