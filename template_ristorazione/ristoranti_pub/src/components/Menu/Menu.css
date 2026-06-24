@@ -2,7 +2,6 @@
    Menu.css — Dark restaurant menu page
    Inspired by the iFoods reference design
    ══════════════════════════════════════════════════════════════════ */
-
 /* ── Base section ── */
 .menu {
   background: var(--color-bg);
